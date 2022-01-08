@@ -13,7 +13,14 @@ public class Player : MonoBehaviour
     private Vector3 _playerVelocity;
     [SerializeField]
     private float _jumpheight = 2.0f;
-    private float _gravity = -9.81f;
+    [SerializeField]
+    private float _gravity = -15.81f;
+
+    //variable for player coins
+    [SerializeField]
+    private int _coins;
+    
+    private UIManager _UIManager;
 
 
 
@@ -22,9 +29,16 @@ public class Player : MonoBehaviour
     void Start()
     {
         _controller = GetComponent<CharacterController>();
+        _UIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+
+        if (_UIManager == null)
+        {
+
+            Debug.LogError("The UI Manager is NULL");
+        }
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         //get horizontal input
@@ -57,5 +71,12 @@ public class Player : MonoBehaviour
 
 
        
+    }
+
+    public void AddCoins()
+    {
+        _coins++;
+
+        _UIManager.UpdateCoinDisplay(_coins);
     }
 }
