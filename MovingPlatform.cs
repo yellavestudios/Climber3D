@@ -6,7 +6,7 @@ public class MovingPlatform : MonoBehaviour
 {
     [SerializeField]
     private Transform _targetA, _targetB;
-    private float _speed = 1.0f;
+    private float _speed = 4.0f;
     private bool _switching = false;
 
     // Start is called before the first frame update
@@ -16,7 +16,7 @@ public class MovingPlatform : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         if (_switching == false)
@@ -44,10 +44,20 @@ public class MovingPlatform : MonoBehaviour
     //collision detection with player
     //if collide with player
     //take player parent = this game object
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            other.transform.parent = this.transform;
+        }
+    }
 
     //exit collision
     //check if the player exits
     //take the player parent = null
 
+    private void OnTriggerExit(Collider other)
+    {
+        other.transform.parent = null;
+    }
 }

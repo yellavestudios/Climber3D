@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     private float _jumpheight = 2.0f;
     [SerializeField]
     private float _gravity = -15.81f;
+    private bool _canDoubleJump = false;
 
     //variable for player coins
     [SerializeField]
@@ -47,6 +48,7 @@ public class Player : MonoBehaviour
         if (_groundedPlayer && _playerVelocity.y < 0)
         {
             _playerVelocity.y = 0f;
+            
         }
 
         //define direction based on that input
@@ -63,7 +65,21 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && _groundedPlayer)
         {
             _playerVelocity.y += Mathf.Sqrt(_jumpheight * -2.0f * _gravity );
+            _canDoubleJump = true;
 
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (_canDoubleJump == true)
+                {
+                    _playerVelocity.y += Mathf.Sqrt(_jumpheight * -4.0f * _gravity);
+                    _canDoubleJump = false;
+                }
+               
+
+            }
         }
 
         _playerVelocity.y += _gravity * Time.deltaTime;
