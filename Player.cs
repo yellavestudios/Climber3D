@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     
     private UIManager _UIManager;
 
+    [SerializeField]
+    private int _lives = 3;
 
 
 
@@ -37,6 +39,8 @@ public class Player : MonoBehaviour
 
             Debug.LogError("The UI Manager is NULL");
         }
+
+        _UIManager.UpdateLivesDisplay(_lives);
     }
 
     
@@ -94,5 +98,10 @@ public class Player : MonoBehaviour
         _coins++;
 
         _UIManager.UpdateCoinDisplay(_coins);
+    }
+
+    public void LoseLives()
+    {
+
     }
 }

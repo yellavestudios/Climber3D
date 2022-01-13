@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField]
     private Text _coinText;
+    [SerializeField]
+    private Text _livesText;
     
     //UpdateCoinDisplay()
 
@@ -14,4 +16,10 @@ public class UIManager : MonoBehaviour
     {
         _coinText.text = "Coins: " + _coin.ToString();
     }
+
+    public void UpdateLivesDisplay(int _lives)
+    {
+        _livesText.text = "Lives: " + _lives.ToString();
+    }
+
 }
