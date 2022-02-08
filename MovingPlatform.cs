@@ -58,6 +58,10 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        other.transform.parent = null;
+        if(other.tag == "Player")
+        {
+            other.transform.parent = null;
+        }
+       
     }
 }

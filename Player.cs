@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         _controller = GetComponent<CharacterController>();
+        
+        //access to canvas in ui in the inspector
         _UIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
 
         if (_UIManager == null)
@@ -100,8 +103,20 @@ public class Player : MonoBehaviour
         _UIManager.UpdateCoinDisplay(_coins);
     }
 
+    
     public void LoseLives()
     {
+        //decrement lives and update UI Manager
+        _lives--;
 
+        _UIManager.UpdateLivesDisplay(_lives);
+
+        
+        if (_lives < 1)
+        {
+            //reload the scene if you run out of lives
+            SceneManager.LoadScene(0);
+
+        }
     }
 }
